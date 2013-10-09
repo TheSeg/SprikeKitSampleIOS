@@ -113,7 +113,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
 }
 
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithMonster:(SKSpriteNode *)monster {
-    NSLog(@"Hit");
+    //NSLog(@"Hit");
     [projectile removeFromParent];
     [monster removeFromParent];
 }
