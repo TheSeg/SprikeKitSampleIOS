@@ -33,7 +33,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     return CGPointMake(a.x / length, a.y / length);
 }
 
-@interface MyScene ()
+@interface MyScene () <SKPhysicsContactDelegate>
 @property (nonatomic) SKSpriteNode * player;
 @property (nonatomic) SKSpriteNode * monster;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
@@ -110,6 +110,31 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.lastUpdateTimeInterval = currentTime;
     }
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
+}
+
+- (void)projectile:(SKSpriteNode *)projectile didCollideWithMonster:(SKSpriteNode *)monster {
+    NSLog(@"Hit");
+    [projectile removeFromParent];
+    [monster removeFromParent];
+}
+
+- (void)didBeginContact:(SKPhysicsContact *)contact {
+    SKPhysicsBody *firstBody, *secondBody;
+    
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask) {
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    } else {
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    
+    if (
+        ( firstBody.categoryBitMask & projectileCategory ) != 0 &&
+        ( secondBody.categoryBitMask & monsterCategory ) != 0
+    ) {
+        [self projectile:(SKSpriteNode *) firstBody.node didCollideWithMonster:(SKSpriteNode *) secondBody.node];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
