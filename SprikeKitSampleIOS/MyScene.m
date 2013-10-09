@@ -8,12 +8,8 @@
 
 #import "MyScene.h"
 
-@interface MyScene ()
-@property (nonatomic) SKSpriteNode * player;
-@property (nonatomic) SKSpriteNode * monster;
-@property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
-@property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
-@end
+static const uint32_t projectileCategory = 0x1 << 0;
+static const uint32_t monsterCategory = 0x1 << 1;
 
 static inline CGPoint rwAdd(CGPoint a, CGPoint b) {
     return CGPointMake(a.x + b.x, a.y + b.y);
@@ -37,6 +33,13 @@ static inline CGPoint rwNormalize(CGPoint a) {
     return CGPointMake(a.x / length, a.y / length);
 }
 
+@interface MyScene ()
+@property (nonatomic) SKSpriteNode * player;
+@property (nonatomic) SKSpriteNode * monster;
+@property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
+@property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
+@end
+
 @implementation MyScene
 
 -(id)initWithSize:(CGSize)size {    
@@ -46,6 +49,10 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.player = [SKSpriteNode spriteNodeWithImageNamed:@"player"];
         self.player.position = CGPointMake(self.player.size.width/2, self.frame.size.height/2);
         [self addChild:self.player];
+        
+        // Add physics!
+        self.physicsWorld.gravity = CGVectorMake(0, 0);
+        self.physicsWorld.contactDelegate = self;
     }
     return self;
 }
@@ -77,6 +84,12 @@ static inline CGPoint rwNormalize(CGPoint a) {
     SKAction * actionMoveDone = [SKAction removeFromParent];
     [monster runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
     
+    // Add physics!
+    monster.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:monster.size];
+    monster.physicsBody.dynamic = YES;
+    monster.physicsBody.categoryBitMask = monsterCategory;
+    monster.physicsBody.contactTestBitMask = projectileCategory;
+    monster.physicsBody.collisionBitMask = 0;
 }
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
@@ -108,6 +121,14 @@ static inline CGPoint rwNormalize(CGPoint a) {
     // 2 -
     SKSpriteNode * projectile = [SKSpriteNode spriteNodeWithImageNamed:@"projectile"];
     projectile.position = self.player.position;
+    
+    // PHYSICS!
+    projectile.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:projectile.size.width/2];
+    projectile.physicsBody.dynamic = YES;
+    projectile.physicsBody.categoryBitMask = projectileCategory;
+    projectile.physicsBody.contactTestBitMask = monsterCategory;
+    projectile.physicsBody.collisionBitMask = 0;
+    projectile.physicsBody.usesPreciseCollisionDetection = YES;
     
     // 3 -
     CGPoint offset = rwSub(location, projectile.position);
