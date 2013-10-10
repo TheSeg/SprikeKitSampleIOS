@@ -27,6 +27,7 @@
 		8A2D9BD51804D54D00327275 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8A2D9BD21804D54D00327275 /* background-music-aac.caf */; };
 		8A2D9BD61804D54D00327275 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8A2D9BD31804D54D00327275 /* pew-pew-lei.caf */; };
 		8A2D9BD71804D54D00327275 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8A2D9BD41804D54D00327275 /* sprites.atlas */; };
+		8A43194318063DEE00347BEB /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A43194218063DEE00347BEB /* GameOverScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		8A2D9BD21804D54D00327275 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		8A2D9BD31804D54D00327275 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 		8A2D9BD41804D54D00327275 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
+		8A43194118063DED00347BEB /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		8A43194218063DEE00347BEB /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 				8A2D9BAC1804CCC000327275 /* ViewController.m */,
 				8A2D9BAE1804CCC000327275 /* MyScene.h */,
 				8A2D9BAF1804CCC000327275 /* MyScene.m */,
+				8A43194118063DED00347BEB /* GameOverScene.h */,
+				8A43194218063DEE00347BEB /* GameOverScene.m */,
 				8A2D9BB11804CCC100327275 /* Spaceship.png */,
 				8A2D9BB31804CCC100327275 /* Images.xcassets */,
 				8A2D9B9D1804CCC000327275 /* Supporting Files */,
@@ -290,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A43194318063DEE00347BEB /* GameOverScene.m in Sources */,
 				8A2D9BB01804CCC000327275 /* MyScene.m in Sources */,
 				8A2D9BAD1804CCC000327275 /* ViewController.m in Sources */,
 				8A2D9BA71804CCC000327275 /* AppDelegate.m in Sources */,
@@ -504,6 +510,7 @@
 				8A2D9BCC1804CCC100327275 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A2D9BCD1804CCC100327275 /* Build configuration list for PBXNativeTarget "SprikeKitSampleIOSTests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +519,7 @@
 				8A2D9BCF1804CCC100327275 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
