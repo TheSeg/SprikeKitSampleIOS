@@ -139,6 +139,9 @@ static inline CGPoint rwNormalize(CGPoint a) {
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     
+    // Play the sound
+    [self runAction:[SKAction playSoundFileNamed:@"pew-pew-lei.caf" waitForCompletion:NO]];
+    
     // 1 -
     UITouch * touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
